@@ -1,0 +1,34 @@
+<?php
+
+namespace {{namespace}};
+
+use {{model_namespace}}\{{model}};
+
+class {{model}}Service
+{
+    
+    public function getAll(int $limit = 20) {
+        return {{model}}::query()->paginate($limit);
+    }
+    
+    public function store(array $data)
+    {
+        return {{model}}::create($data);
+    }
+
+    public function update({{model}} ${{model_identifire}}, array $data)
+    {
+        ${{model_identifire}}->update($data);
+        return ${{model_identifire}};
+    }
+
+    public function delete({{model}} ${{model_identifire}})
+    {
+        ${{model_identifire}}->delete();
+    }
+
+    public function show($id)
+    {
+        return {{model}}::findOrFail($id);
+    }
+}

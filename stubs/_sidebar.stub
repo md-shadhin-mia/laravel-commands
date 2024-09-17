@@ -1,0 +1,42 @@
+@if (hasPermission('${name}.*'))
+            <li class="has-child {{ request()->routeIs('${name}.*') ? 'open' : '' }}">
+                <a href="#" class="{{ request()->routeIs('${name}.*') ? 'active' : '' }}">
+                    <span class="nav-icon fas fa-chart-line"></span>
+                    <span class="menu-text">{{ t_('menu.${name}') }}</span>
+                    <span class="toggle-icon"></span>
+                </a>
+                <ul>
+                    {{-- @if (hasPermission('${name}.example.*'))
+                        <li>
+                            <a href="{{ route('${name}.example.*') }}"
+                                class="{{ request()->routeIs('${name}.example.*') ? 'active' : '' }}">
+                                <span class="nav-icon fa fa-shopping-cart" style="margin-right: 20px;"></span>
+                                {{ t_('menu.quotations') }}
+                            </a>
+                        </li>
+                    @endif --}}
+
+                    @if (hasPermission('${name}.settings.*'))
+                        <li class="has-subchild {{ request()->routeIs('${name}.couriers.*') ? 'open' : '' }}">
+                            <a href="#" class="{{ request()->routeIs('${name}.couriers.*') ? 'active' : '' }}">
+                                <span class="nav-icon uil uil-atom"></span>
+                                <span class="menu-text">{{ t_('menu.${name} Settings') }}</span>
+                                <span class="toggle-icon"></span>
+                            </a>
+                            {{-- <ul>
+                                @if (hasPermission('${name}.couriers.*'))
+                                    <li>
+                                        <a href="{{ route('${name}.couriers.index') }}"
+                                            class="{{ request()->routeIs('${name}.couriers.*') ? 'active' : '' }}">
+                                            <span class="fas fa-truck" style="margin-right: 20px;"></span>
+                                            {{ t_('menu.couriers') }}
+                                        </a>
+                                    </li>
+                                @endif
+
+                            </ul> --}}
+                        </li>
+                    @endif
+                </ul> 
+            </li>
+        @endif

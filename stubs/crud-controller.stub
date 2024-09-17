@@ -1,0 +1,95 @@
+<?php
+
+namespace {{namespace}};
+
+use App\Http\Controllers\Controller;
+use {{model_namespace}}\{{model}};
+use {{service_namespace}}\{{service}};
+use Illuminate\Http\Request;
+
+class {{controller}} extends Controller
+{
+
+    /**
+     * Service variable
+     *
+     * @var {{service}}
+     */
+    private $service; 
+    function __construct({{service}} $service)
+    {
+        $this->service = $service;
+    }
+    
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $data['{{model_identifire}}s'] = $this->service->getAll();
+
+        return view("{{model_identifire}}s.index", $data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('{{model_identifire}}s.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $validate = $request->validate([
+            //validate rules
+        ]);
+        $this->service->store($validate);
+        return redirect()->route('{{model_identifire}}s.index')->with('success', '{{model}} created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show( $id)
+    {
+        $data['{{model_identifire}}'] = $this->service->show($id);
+
+        return view("{{model_identifire}}s.show", $data);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit({{model}} ${{model_identifire}})
+    {
+        $data['{{model_identifire}}'] = ${{model_identifire}};
+        //
+        return view("{{model_identifire}}s.edit", $data);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, {{model}} ${{model_identifire}})
+    {
+        $validate = $request->validate([
+            //validate rules
+        ]);
+        $this->service->update(${{model_identifire}}, $validate);
+
+        return redirect()->route('{{model_identifire}}s.index')->with('success', '{{model}} updated successfully.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy({{model}} ${{model_identifire}})
+    {
+        $this->service->delete(${{model_identifire}});
+        return redirect()->route('{{model_identifire}}s.index')->with('success', '{{model}} deleted successfully.');
+    }
+}
